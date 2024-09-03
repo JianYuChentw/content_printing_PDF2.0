@@ -6,15 +6,19 @@ from textwrap import wrap
 
     # 工作報告 - 多行文本處理
 def add_wrapped_text(text_object, text, max_chars):
-        # 將文本按指定的字元數進行換行
-        lines = []
-        for original_line in text.split('\n'):
-            wrapped_lines = wrap(original_line, max_chars)
-            lines.extend(wrapped_lines)
-        for line in lines:
-            text_object.textLine(line)
+    # 將文本按指定的字元數進行換行
+    lines = []
+    for original_line in text.split('\n'):
+        wrapped_lines = wrap(original_line, max_chars)
+        lines.extend(wrapped_lines)
+    for line in lines:
+        text_object.textLine(line)
   
-
+def determineCheck(option):
+    if option:
+        return "V"
+    else :
+        return
 
 
 def generate_pdf_with_chinese(customer_info, output_filename):
@@ -42,25 +46,62 @@ def generate_pdf_with_chinese(customer_info, output_filename):
     c.drawString(320, height - 120, f"{customer_info['constructionAddress']}")
 
     # 施工頻率
-    c.drawString(80, height - 137, f"{customer_info['singleConstruction']}")
-    c.drawString(178.5, height - 137, f"{customer_info['repeatedlyConstruction']}")
-    c.drawString(315, height - 137, "10")
-    c.drawString(400, height - 137, "10")
-    c.drawString(485, height - 137, "10")
+    # customer_info['construction']:
+    c.drawString(80, height - 137, "V")
+  
+    c.drawString(178.5, height - 137, "V")
+    # c.drawString(315, height - 137, customer_info['monthly'])
+    # c.drawString(400, height - 137, customer_info['quarterly'])
+    # c.drawString(485, height - 137, customer_info['yearly'])
+    
+    # 暫時使用非變數
+    c.drawString(315, height - 137, '10')
+    c.drawString(400, height - 137, '10')
+    c.drawString(485, height - 137, '10')
 
     # 防治項目勾選
-    c.drawString(80, height - 165, "V")
-    c.drawString(80, height - 185, "V")
+    c.drawString(80, height - 167, "V")
+    c.drawString(80, height - 187, "V")
 
-    c.drawString(235, height - 165, "V")
-    c.drawString(235, height - 185, "V")
+    c.drawString(235, height - 167, "V")
+    c.drawString(235, height - 187, "V")
 
-    c.drawString(420, height - 165, "V")
-    c.drawString(420, height - 185, "V")
- 
+    c.drawString(420, height - 167, "V")
+    c.drawString(420, height - 187, "V")
+
+
+
+    # 藥品使用
+    c.drawString(30, height - 232, "E一之一")
+    c.drawString(213, height - 232, "E一之二")
+    c.drawString(273, height - 232, "E一之三")
+    c.drawString(333, height - 232, "E一之四")
+    c.drawString(434, height - 232, "E一之五")
+
+    c.drawString(30, height - 247, "B二之一")
+    c.drawString(213, height - 247, "B二之二")
+    c.drawString(273, height - 247, "B二之三")
+    c.drawString(333, height - 247, "B二之四")
+    c.drawString(434, height - 247, "B二之五")
+
+    c.drawString(30, height - 262, "C二之一")
+    c.drawString(213, height - 262, "C二之二")
+    c.drawString(273, height - 262, "C二之三")
+    c.drawString(333, height - 262, "C二之四")
+    c.drawString(434, height - 262, "C二之五")
+
+    c.drawString(30, height - 277, "D二之一")
+    c.drawString(213, height - 277, "D二之二")
+    c.drawString(273, height - 277, "D二之三")
+    c.drawString(333, height - 277, "D二之四")
+    c.drawString(434, height - 277, "D二之五")
 
     # 勾選一般蟲害防治(左側)
     c.drawString(42, height - 400, "V")
+    c.drawString(42, height - 420, "V")
+    c.drawString(42, height - 440, "V")
+    c.drawString(42, height - 460, "V")
+    c.drawString(42, height - 480, "V")
 
     # 勾選一般蟲害防治(右側)
     c.drawString(170, height - 400, "V")
@@ -73,18 +114,21 @@ def generate_pdf_with_chinese(customer_info, output_filename):
     c.drawString(435, height - 400, "V")
 
 
-  
+
+
+
+    c.drawString(100, height - 570, customer_info['todoList']) 
     text_object = c.beginText(40, height - 590)
     text_object.setFont("twKai", 12)
     add_wrapped_text(text_object, customer_info['workReport'], 31)
     c.drawText(text_object)
-
+    c.drawString(105, height - 730, "範例一二三")
     # 保存PDF
     c.save()
 
 # 範例數據
 
-data='已完成施工，無異常，這句話看似簡單，卻承載著大量的工作與責任。首先，施工過程是一個繁瑣而複雜的任務，涉及到許多不同的階段和專業技能。從最初的設計圖紙到材料選擇，再到實際施工，每一個環節都需要嚴格的監督與管理。施工人員必須確保所有的工序都按照計劃進行，並且在過程中必須處理各種突發情況，例如天氣變化、材料延遲或意外的技術問題。其次，「無異常」這三個字代表了施工過程中沒有出現任何問題或偏差。這不僅僅是一個簡單的結果，更是施工質量和管理水平的體現。在現代建築施工中，無異常的完成意味著所有的設計規範都得到了嚴格遵守，所有的安全措施都得到了有效的實施。這要求施工團隊具有高度的專業知識和豐富的經驗，同時也要求他們在工作中保持高度的警惕和細心，從而及時發現和解決任何可能影響施工質量的問題。'
+data='已完成施工，無異常，這句話看似簡單，卻承載著大量的工作與責任。首先，施工過程是一個繁瑣而複雜的任務，涉及到許多不同的階段和專業技能。從最初的設計圖紙到材料選擇，再到實際施工，每一個環節都需要嚴格的監督與管理。施工人員必須確保所有的工序都按照計劃進行，並且在過程中必須處理各種突發情況，例如天氣變化、材料延遲或意外的技術問題。其次，「無異常」這三個字代表了施工過程中沒有出現任何問題或偏差。這不僅僅是一個簡單的結果，更是施工質量和管理水平的體現。在現代建築施工中，無異常的完成意味著所有的設計規範都得到了嚴格遵守，所有的安全措施都得到了有效的實施。'
 
 customer_info = {
     'clientName': '張三',
