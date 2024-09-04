@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (
 import sys
 
 class InputWidget(QWidget):
-    def __init__(self, label_title, label_text, width=200, height=50, input_height=30, orientation="horizontal", parent=None):
+    def __init__(self, label_title, label_text, width=200, input_height=30, orientation="horizontal", parent=None):
         super().__init__(parent)
 
         # 根據 orientation 決定使用哪種布局
@@ -15,6 +15,7 @@ class InputWidget(QWidget):
 
         # 創建標籤
         label = QLabel(f'{label_text}:')
+        label.setFixedHeight(20)  # 可以固定標籤高度，進一步減少間距
         layout.addWidget(label)
 
         # 創建輸入框
@@ -22,29 +23,14 @@ class InputWidget(QWidget):
         input_field.setMinimumHeight(input_height)  # 設置輸入框的最小高度
         layout.addWidget(input_field)
 
-        # 使用 QGroupBox 將它們包裹在一起
-        group_box = QGroupBox(label_title)
-        group_box.setLayout(layout)
-
-        # 設置 QGroupBox 的寬度，但不固定高度
-        group_box.setFixedWidth(width)
+        # 移除內部邊距和縮小元件間距
+        layout.setContentsMargins(0, 0, 0, 0)  # 去除內邊距
+        layout.setSpacing(2)  # 減少標籤和輸入框之間的間距
 
         # 設定主窗口的布局
-        main_layout = QVBoxLayout()
-        main_layout.addWidget(group_box)
-        self.setLayout(main_layout)
+        self.setLayout(layout)
+
+        # 設定輸入框組件的寬度
+        self.setFixedWidth(width)
 
 
-# # 測試這個元件
-# if __name__ == "__main__":
-#     app = QApplication(sys.argv)
-
-#     # 水平排列
-#     window_horizontal = InputWidget("表單標題", "輸入標籤", width=300, input_height=50, orientation="horizontal")
-#     window_horizontal.show()
-
-#     # 垂直排列
-#     window_vertical = InputWidget("表單標題", "輸入標籤", width=300, input_height=50, orientation="vertical")
-#     window_vertical.show()
-
-#     sys.exit(app.exec())

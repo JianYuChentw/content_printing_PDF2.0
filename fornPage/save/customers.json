@@ -1,0 +1,35 @@
+{
+    "客戶A": {
+        "name": "客戶A",
+        "invoice_title": "A公司",
+        "tax_id": "12345678",
+        "phone": "0912345678",
+        "contact_person": "張先生",
+        "window": "施作窗口A",
+        "window_phone": "0912345678",
+        "date": "2024/09/01",
+        "address": "台北市信義區"
+    },
+    "客戶B": {
+        "name": "客戶Ｂ",
+        "invoice_title": "B公司",
+        "tax_id": "87654321",
+        "phone": "0987654321",
+        "contact_person": "李小姐",
+        "window": "施作窗口B",
+        "window_phone": "0987654321",
+        "date": "2024/10/01",
+        "address": "台中市西屯區"
+    },
+    "客戶C": {
+        "name": "客戶C",
+        "invoice_title": "C公司",
+        "tax_id": "11223344",
+        "phone": "0922334455",
+        "contact_person": "王小明",
+        "window": "施作窗口C",
+        "window_phone": "0922334455",
+        "date": "2024/11/01",
+        "address": "高雄市前鎮區"
+    }
+}
