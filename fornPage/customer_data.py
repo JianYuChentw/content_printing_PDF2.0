@@ -4,7 +4,7 @@ import os
 class CustomerData:
     def __init__(self, json_file='save/customers.json'):
         # 獲取當前腳本的目錄，並拼接出 JSON 文件的絕對路徑
-        base_dir = os.path.dirname(os.path.abspath(__file__))
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.json_file = os.path.join(base_dir, json_file)
         print(f"客戶資料路徑: {self.json_file}")  # 新增路徑檢查
         self.data = self.load_data()

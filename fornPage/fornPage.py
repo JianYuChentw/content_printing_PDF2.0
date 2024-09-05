@@ -6,6 +6,7 @@ from PyQt6.QtCore import Qt
 import sys
 from .components import InputWidget  # 確認引入 InputWidget 正確
 from .customer_data import CustomerData  # 引入客戶資料操作模組
+# from .checkboxes_area import CheckboxesArea  # 引入拆分出的勾選單區域
 
 class FrontPage(QWidget):
 
@@ -147,32 +148,14 @@ class FrontPage(QWidget):
         frequency_widget.setFixedWidth(500)  # 設置與頂部相同的固定寬度
 
         # ---- 勾選單區域 ----
-        checkboxes_layout = QGridLayout()
-        
-        checkboxes = [
-            ("一般害蟲防治 – Pest Control", 0, 0),
-            ("白蟻防治 – Termite Control", 0, 1),
-            ("鼠害防治 – Rodent Control", 0, 2),
-            ("跳蚤防治 – Fleas Control", 1, 0),
-            ("粉狀蛀蟲防治 – Powder Post Beetle", 1, 1),
-            ("其他 – Others", 1, 2)
-        ]
-
-        # 動態添加複選框
-        for text, row, col in checkboxes:
-            checkbox = QCheckBox(text)
-            checkboxes_layout.addWidget(checkbox, row, col)
-
-        # 包裹複選框布局
-        checkboxes_group = QGroupBox("防治項目")
-        checkboxes_group.setLayout(checkboxes_layout)
+        # checkboxes_group = CheckboxesArea()
 
         # 將 frequency_widget 和勾選單區域添加到主佈局中
         main_layout = QVBoxLayout()
         main_layout.addLayout(central_layout)
         main_layout.addWidget(form_group_box, alignment=Qt.AlignmentFlag.AlignCenter)
         main_layout.addWidget(frequency_widget, alignment=Qt.AlignmentFlag.AlignCenter)
-        main_layout.addWidget(checkboxes_group, alignment=Qt.AlignmentFlag.AlignCenter)  # 添加勾選單區域
+        # main_layout.addWidget(checkboxes_group, alignment=Qt.AlignmentFlag.AlignCenter)  # 添加勾選單區域
 
         self.setLayout(main_layout)
 
