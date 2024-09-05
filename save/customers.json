@@ -1,4 +1,15 @@
 {
+    "-": {
+        "name": "",
+        "invoice_title": "",
+        "tax_id": "",
+        "phone": "",
+        "contact_person": "",
+        "window": "",
+        "window_phone": "",
+        "date": "",
+        "address": ""
+    },
     "客戶A": {
         "name": "客戶A",
         "invoice_title": "A公司",

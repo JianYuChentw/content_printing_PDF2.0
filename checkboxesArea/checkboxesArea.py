@@ -2,7 +2,8 @@ from PyQt6.QtWidgets import QGroupBox, QGridLayout, QCheckBox
 
 class CheckboxesArea(QGroupBox):
     def __init__(self):
-        super().__init__("防治項目")
+        super().__init__("")
+
 
         # 創建複選框的佈局
         checkboxes_layout = QGridLayout()
@@ -17,9 +18,10 @@ class CheckboxesArea(QGroupBox):
             ("其他 – Others", 1, 2)
         ]
 
-        # 動態添加複選框到佈局
+        # 動態添加複選框到佈局，並設置每個複選框的字體大小為 16px
         for text, row, col in checkboxes:
             checkbox = QCheckBox(text)
+            checkbox.setStyleSheet("font-size: 16px;")
             checkboxes_layout.addWidget(checkbox, row, col)
 
         # 設置佈局

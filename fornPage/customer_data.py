@@ -25,17 +25,26 @@ class CustomerData:
 
     def add_customer(self, customer_name, customer_info):
         """新增客戶資料"""
+        if customer_name == "-":
+            print("客戶名稱無效，無法新增客戶。")  # 顯示提示訊息
+            return
         self.data[customer_name] = customer_info
         self.save_data()
 
     def update_customer(self, customer_name, customer_info):
         """更新客戶資料"""
+        if customer_name == "-":
+            print("客戶名稱無效，無法更新客戶。")  # 顯示提示訊息
+            return
         if customer_name in self.data:
             self.data[customer_name] = customer_info
             self.save_data()
 
     def delete_customer(self, customer_name):
         """刪除客戶資料"""
+        if customer_name == "-":
+            print("客戶名稱無效，無法刪除客戶。")  # 顯示提示訊息
+            return
         if customer_name in self.data:
             del self.data[customer_name]
             self.save_data()

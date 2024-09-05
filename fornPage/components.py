@@ -15,6 +15,7 @@ class InputWidget(QWidget):
 
         # 創建標籤
         label = QLabel(f'{label_text}:')
+        label.setStyleSheet("font-size:16px")
         label.setFixedHeight(20)  # 可以固定標籤高度，進一步減少間距
         layout.addWidget(label)
 

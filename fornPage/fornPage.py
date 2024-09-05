@@ -69,7 +69,7 @@ class FrontPage(QWidget):
 
         # 使用 QGridLayout 來放置左右兩邊的表單元素
         grid_layout = QGridLayout()
-        grid_layout.setVerticalSpacing(10) # set
+        grid_layout.setVerticalSpacing(10)  # set
 
         # 表單元素
         self.name_input = InputWidget("", "客戶名稱", 250, 30, 30)
@@ -89,11 +89,7 @@ class FrontPage(QWidget):
         self.window_input = InputWidget("", "施作聯絡窗口", 250, 30, 30)
         self.window_phone_input = InputWidget("", "施作窗口電話", 250, 30, 30)
         self.date_input = InputWidget("", "施工日期/時間", 250, 30, 30)
-
-
         self.address_input = InputWidget("", "施作地址", 300, 30, orientation="vertical")
-
-
 
         grid_layout.addWidget(self.window_input, 0, 1)
         grid_layout.addWidget(self.window_phone_input, 1, 1)
@@ -101,7 +97,7 @@ class FrontPage(QWidget):
         grid_layout.addWidget(self.address_input, 3, 1)
 
         # 創建一個 QGroupBox 來包裹 grid_layout
-        form_group_box = QGroupBox("客戶資訊表單")
+        form_group_box = QGroupBox("")
         form_group_box.setLayout(grid_layout)
 
         # 創建施工頻率選擇區域
@@ -147,15 +143,11 @@ class FrontPage(QWidget):
         frequency_widget.setLayout(frequency_layout)
         frequency_widget.setFixedWidth(500)  # 設置與頂部相同的固定寬度
 
-        # ---- 勾選單區域 ----
-        # checkboxes_group = CheckboxesArea()
-
-        # 將 frequency_widget 和勾選單區域添加到主佈局中
+        # 將 frequency_widget 和表單添加到主佈局中
         main_layout = QVBoxLayout()
         main_layout.addLayout(central_layout)
         main_layout.addWidget(form_group_box, alignment=Qt.AlignmentFlag.AlignCenter)
         main_layout.addWidget(frequency_widget, alignment=Qt.AlignmentFlag.AlignCenter)
-        # main_layout.addWidget(checkboxes_group, alignment=Qt.AlignmentFlag.AlignCenter)  # 添加勾選單區域
 
         self.setLayout(main_layout)
 
@@ -204,6 +196,9 @@ class FrontPage(QWidget):
     def add_customer(self):
         """新增客戶"""
         customer_name = self.add_input.text()
+        if customer_name == "-":
+            self.show_message_box("客戶名稱無效，無法新增")
+            return
         if customer_name:
             customer_info = self.get_form_data()
             self.customer_data.add_customer(customer_name, customer_info)
@@ -214,6 +209,9 @@ class FrontPage(QWidget):
     def update_customer(self):
         """更新客戶"""
         customer_name = self.dropdown.currentText()
+        if customer_name == "-":
+            self.show_message_box("客戶名稱無效，無法更新")
+            return
         customer_info = self.get_form_data()
         self.customer_data.update_customer(customer_name, customer_info)
         self.show_message_box("更新成功")
@@ -221,6 +219,9 @@ class FrontPage(QWidget):
     def delete_customer(self):
         """刪除客戶"""
         customer_name = self.dropdown.currentText()
+        if customer_name == "-":
+            self.show_message_box("客戶名稱無效，無法刪除")
+            return
         self.customer_data.delete_customer(customer_name)
         self.dropdown.removeItem(self.dropdown.currentIndex())
         self.show_message_box("刪除成功")
