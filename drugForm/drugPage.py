@@ -80,6 +80,7 @@ class DrugForm(QWidget):
             input_row = []
             for col in range(5):
                 line_edit = QLineEdit()
+                line_edit.setFixedHeight(30)
                 grid_layout.addWidget(line_edit, row, col)
                 input_row.append(line_edit)
             self.inputs.append(input_row)

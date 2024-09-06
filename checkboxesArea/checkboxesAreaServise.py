@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QGroupBox, QGridLayout, QCheckBox
 
-class CheckboxesArea(QGroupBox):
+class CheckboxesAreaServise(QGroupBox):
     def __init__(self):
         super().__init__("")
 
