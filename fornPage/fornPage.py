@@ -104,9 +104,9 @@ class FrontPage(QWidget):
         frequency_layout = QHBoxLayout()
         frequency_label = QLabel("施工頻率:")
         frequency_layout.addWidget(frequency_label)
-        frequency_dropdown = QComboBox()
-        frequency_dropdown.addItems(["單次", "多次"])
-        frequency_layout.addWidget(frequency_dropdown)
+        self.frequency_dropdown = QComboBox()
+        self.frequency_dropdown.addItems(["單次", "多次"])
+        frequency_layout.addWidget(self.frequency_dropdown)
 
         # 創建每月、每季、每半年輸入框的水平布局
         monthly_layout = QHBoxLayout()
@@ -136,7 +136,7 @@ class FrontPage(QWidget):
         frequency_layout.addLayout(halfyear_layout)
 
         # 根據選擇的頻率動態更新輸入框的啟用狀態
-        frequency_dropdown.currentTextChanged.connect(self.update_frequency_inputs)
+        self.frequency_dropdown.currentTextChanged.connect(self.update_frequency_inputs)
 
         # 將 frequency_layout 包裝進 QWidget 並設置固定寬度
         frequency_widget = QWidget()
@@ -229,6 +229,15 @@ class FrontPage(QWidget):
 
     def get_form_data(self):
         """取得表單中的客戶資料"""
+        monthly = ""
+        quarterly = ""
+        halfyear = ""
+        if self.frequency_dropdown.currentText() == "多次":
+            monthly = self.monthly_input.text() or ""
+            quarterly = self.quarterly_input.text() or ""
+            halfyear = self.halfyear_input.text() or "" 
+
+
         return {
             "name": self.name_input.findChild(QLineEdit).text(),
             "invoice_title": self.invoice_input.findChild(QLineEdit).text(),
@@ -238,7 +247,11 @@ class FrontPage(QWidget):
             "window": self.window_input.findChild(QLineEdit).text(),
             "window_phone": self.window_phone_input.findChild(QLineEdit).text(),
             "date": self.date_input.findChild(QLineEdit).text(),
-            "address": self.address_input.findChild(QLineEdit).text()
+            "address": self.address_input.findChild(QLineEdit).text(),
+            "frequency": self.frequency_dropdown.currentText(),
+            "monthly": monthly,
+            "quarterly": quarterly,
+            "halfyear": halfyear
         }
 
     def show_message_box(self, message):

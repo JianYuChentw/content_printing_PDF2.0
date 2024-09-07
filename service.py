@@ -4,7 +4,14 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 from textwrap import wrap
 
-    # 工作報告 - 多行文本處理
+# 爭偽回傳勾號
+def true_false_return(value):
+    if value:
+        return "V"
+    else:
+        return ""
+
+# 工作報告 - 多行文本處理
 def add_wrapped_text(text_object, text, max_chars):
     # 將文本按指定的字元數進行換行
     lines = []
@@ -46,78 +53,83 @@ def generate_pdf_with_chinese(customer_info, output_filename):
     c.drawString(320, height - 150, f"{customer_info['constructionAddress']}")
 
     # 施工頻率
-    # customer_info['construction']:
-    c.drawString(81, height - 167, "V")
+    if customer_info['construction'] == "多次":
+        c.drawString(180, height - 167, "V")
+        c.drawString(315, height - 167, customer_info['monthly'])
+        c.drawString(400, height - 167, customer_info['quarterly'])
+        c.drawString(490, height - 167, customer_info['yearly'])
+    else:
+        c.drawString(81, height - 167, "V")
   
-    c.drawString(180, height - 167, "V")
-    # c.drawString(315, height - 167, customer_info['monthly'])
-    # c.drawString(400, height - 167, customer_info['quarterly'])
-    # c.drawString(490, height - 167, customer_info['yearly'])
+    
     
     # 暫時使用非變數
-    c.drawString(315, height - 167, '10')
-    c.drawString(400, height - 167, '10')
-    c.drawString(490, height - 167, '10')
+    # c.drawString(315, height - 167, '10')
+    # c.drawString(400, height - 167, '10')
+    # c.drawString(490, height - 167, '10')
 
     # 防治項目勾選
-    c.drawString(80, height -189, "V")
-    c.drawString(80, height - 215, "V")
+    c.drawString(80, height -189, true_false_return(customer_info['pestControl']))
+    c.drawString(80, height - 215, true_false_return(customer_info['fleasControl']))
 
-    c.drawString(235, height - 189, "V")
-    c.drawString(235, height - 215, "V")
+    c.drawString(235, height - 189, true_false_return(customer_info['temiteControl']))
+    c.drawString(235, height - 215, true_false_return(customer_info['powerControl']))
 
-    c.drawString(420, height - 189, "V")
-    c.drawString(420, height - 215, "V")
+    c.drawString(420, height - 189, true_false_return(customer_info['rodentControl']))
+    c.drawString(420, height - 215, true_false_return(customer_info['otrher']))
 
 
 
     # 藥品使用
-    c.drawString(28.5, height - 278, "E一之一")
-    c.drawString(211.5, height - 278, "E一之二")
-    c.drawString(271.5, height - 278, "E一之三")
-    c.drawString(331, height - 278, "E一之四")
-    c.drawString(432.5, height - 278, "E一之五")
+    c.drawString(28.5, height - 278, customer_info['drug1_1'])
+    c.drawString(211.5, height - 278, customer_info['drug1_2'])
+    c.drawString(271.5, height - 278, customer_info['drug1_3'])
+    c.drawString(331, height - 278, customer_info['drug1_4'])
+    c.drawString(432.5, height - 278, customer_info['drug1_5'])
 
-    c.drawString(28.5, height - 301, "B二之一")
-    c.drawString(211.5, height - 301, "B二之二")
-    c.drawString(271.5, height - 301, "B二之三")
-    c.drawString(331, height - 301, "B二之四")
-    c.drawString(432.5, height - 301, "B二之五")
 
-    c.drawString(28.5, height - 324, "C二之一")
-    c.drawString(211.5, height - 324, "C二之二")
-    c.drawString(271.5, height - 324, "C二之三")
-    c.drawString(331, height - 324, "C二之四")
-    c.drawString(432.5, height - 324, "C二之五")
+    c.drawString(28.5, height - 301, customer_info['drug2_1'])
+    c.drawString(211.5, height - 301, customer_info['drug2_2'])
+    c.drawString(271.5, height - 301, customer_info['drug2_3'])
+    c.drawString(331, height - 301, customer_info['drug2_4'])
+    c.drawString(432.5, height - 301, customer_info['drug2_5'])
 
-    c.drawString(28.5, height - 348, "D二之一")
-    c.drawString(211.5, height - 348, "D二之二")
-    c.drawString(271.5, height - 348, "D二之三")
-    c.drawString(331, height - 348, "D二之四")
-    c.drawString(432.5, height - 348, "D二之五")
+
+    c.drawString(28.5, height - 324, customer_info['drug3_1'])
+    c.drawString(211.5, height - 324, customer_info['drug3_2'])
+    c.drawString(271.5, height - 324, customer_info['drug3_3'])
+    c.drawString(331, height - 324, customer_info['drug3_4'])
+    c.drawString(432.5, height - 324, customer_info['drug3_5'])
+
+
+    c.drawString(28.5, height - 348, customer_info['drug4_1'])
+    c.drawString(211.5, height - 348, customer_info['drug4_2'])
+    c.drawString(271.5, height - 348, customer_info['drug4_3'])
+    c.drawString(331, height - 348, customer_info['drug4_4'])
+    c.drawString(432.5, height - 348, customer_info['drug4_5'])
 
     # 勾選一般蟲害防治(左側)
-    c.drawString(43, height - 396, "V")
-    c.drawString(43, height - 418, "V")
-    c.drawString(43, height - 440, "V")
-    c.drawString(43, height - 462, "V")
-    c.drawString(43, height - 484, "V")
+    c.drawString(43, height - 396, true_false_return(True))
+    c.drawString(43, height - 418, true_false_return(True))
+    c.drawString(43, height - 440, true_false_return(True))
+    c.drawString(43, height - 462, true_false_return(True))
+    c.drawString(43, height - 484, true_false_return(True))
 
     # 勾選一般蟲害防治(右側)
-    c.drawString(171, height - 396, "V")
+    c.drawString(171, height - 396, true_false_return(True))
 
     # 蟲紙
     c.drawString(255, height - 484, "10")
 
     # 勾選鼠害防治(左側)
-    c.drawString(312, height - 396, "V")
+    c.drawString(312, height - 396, true_false_return(True))
     
 
     # 勾選鼠害防治(右側)
-    c.drawString(437, height - 396, "V")
+    c.drawString(437, height - 396, true_false_return(True))
 
     # 捕鼠
-    c.drawString(537, height - 440, "10")
+    c.drawString(537, height - 440, true_false_return(True))
 
 
 
@@ -128,8 +140,8 @@ def generate_pdf_with_chinese(customer_info, output_filename):
     text_object.setFont("twKai", 12)
     add_wrapped_text(text_object, customer_info['workReport'], 31)
     c.drawText(text_object)
-    c.drawString(105, height - 680, "範例一二三")
-    c.drawString(105, height - 700, "範例一二三")
+    c.drawString(105, height - 680, customer_info['technician'])
+    c.drawString(105, height - 700, customer_info['pharmaceuticalTechnician'])
     # 保存PDF
     c.save()
 
@@ -147,10 +159,54 @@ customer_info = {
     'constructionPersonInChargePhone': '0912-345-678',
     'constructionDate': '2024/01/01 00:00 - 2024/01/01 00:00',
     'constructionAddress': '台北市中正區',
-    'singleConstruction': 'V',
-    'repeatedlyConstruction': 'V',
+
+    
+    'construction':"單次",
+    'monthly':"",
+    'quarterly':"",
+    'yearly':"",
+
+    'pestControl':True,
+    'fleasControl':True,
+    'temiteControl':True,
+    'powerControl':True,
+    'rodentControl':True,
+    'otrher':True,
+
+    'drug1_1': "E一之一",
+    'drug1_2': "E一之二",
+    'drug1_3': "E一之三",
+    'drug1_4': "E一之四",
+    'drug1_5': "E一之五",
+
+
+    'drug2_1': "B二之一",
+    'drug2_2': "B二之二",
+    'drug2_3': "B二之三",
+    'drug2_4': "B二之四",
+    'drug2_5': "B二之五",
+
+
+
+    'drug3_1': "C二之一",
+    'drug3_2': "C二之二",
+    'drug3_3': "C二之三",
+    'drug3_4': "C二之四",
+    'drug3_5': "C二之五",
+
+    'drug4_1': "D二之一",
+    'drug4_2': "D二之二",
+    'drug4_3': "D二之三",
+    'drug4_4': "D二之四",
+    'drug4_5': "D二之五",
+
+
+
+
     'todoList': '施工項目一、施工項目二',
-    'workReport': data
+    'workReport': data,
+    'technician': "我操作",
+    'pharmaceuticalTechnician': "我施藥",
 }
 
 # 生成PDF
