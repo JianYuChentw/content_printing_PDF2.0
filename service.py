@@ -34,95 +34,102 @@ def generate_pdf_with_chinese(customer_info, output_filename):
 
     # 輸出客戶資訊（左側）
     c.drawString(80, height - 71, f"{customer_info['clientName']}")
-    c.drawString(80, height - 85, f"{customer_info['billName']}")
-    c.drawString(80, height - 98, f"{customer_info['invoiceNumber']}")
-    c.drawString(80, height - 111, f"{customer_info['clientPhone']}")
-    c.drawString(80, height - 124, f"{customer_info['clientContactPerson']}")
+    c.drawString(80, height - 90, f"{customer_info['billName']}")
+    c.drawString(80, height - 110, f"{customer_info['invoiceNumber']}")
+    c.drawString(80, height - 131, f"{customer_info['clientPhone']}")
+    c.drawString(80, height - 151, f"{customer_info['clientContactPerson']}")
 
     # 輸出客戶資訊（右側）
-    c.drawString(320, height - 80, f"{customer_info['constructionPersonInCharge']}")
-    c.drawString(461, height - 80, f"{customer_info['constructionPersonInChargePhone']}")
-    c.drawString(320, height - 100, f"{customer_info['constructionDate']}")
-    c.drawString(320, height - 120, f"{customer_info['constructionAddress']}")
+    c.drawString(322, height - 85, f"{customer_info['constructionPersonInCharge']}")
+    c.drawString(462, height - 85, f"{customer_info['constructionPersonInChargePhone']}")
+    c.drawString(322, height - 108, f"{customer_info['constructionDate']}")
+    c.drawString(320, height - 150, f"{customer_info['constructionAddress']}")
 
     # 施工頻率
     # customer_info['construction']:
-    c.drawString(80, height - 137, "V")
+    c.drawString(81, height - 167, "V")
   
-    c.drawString(178.5, height - 137, "V")
-    # c.drawString(315, height - 137, customer_info['monthly'])
-    # c.drawString(400, height - 137, customer_info['quarterly'])
-    # c.drawString(485, height - 137, customer_info['yearly'])
+    c.drawString(180, height - 167, "V")
+    # c.drawString(315, height - 167, customer_info['monthly'])
+    # c.drawString(400, height - 167, customer_info['quarterly'])
+    # c.drawString(490, height - 167, customer_info['yearly'])
     
     # 暫時使用非變數
-    c.drawString(315, height - 137, '10')
-    c.drawString(400, height - 137, '10')
-    c.drawString(485, height - 137, '10')
+    c.drawString(315, height - 167, '10')
+    c.drawString(400, height - 167, '10')
+    c.drawString(490, height - 167, '10')
 
     # 防治項目勾選
-    c.drawString(80, height - 167, "V")
-    c.drawString(80, height - 187, "V")
+    c.drawString(80, height -189, "V")
+    c.drawString(80, height - 215, "V")
 
-    c.drawString(235, height - 167, "V")
-    c.drawString(235, height - 187, "V")
+    c.drawString(235, height - 189, "V")
+    c.drawString(235, height - 215, "V")
 
-    c.drawString(420, height - 167, "V")
-    c.drawString(420, height - 187, "V")
+    c.drawString(420, height - 189, "V")
+    c.drawString(420, height - 215, "V")
 
 
 
     # 藥品使用
-    c.drawString(30, height - 232, "E一之一")
-    c.drawString(213, height - 232, "E一之二")
-    c.drawString(273, height - 232, "E一之三")
-    c.drawString(333, height - 232, "E一之四")
-    c.drawString(434, height - 232, "E一之五")
+    c.drawString(28.5, height - 278, "E一之一")
+    c.drawString(211.5, height - 278, "E一之二")
+    c.drawString(271.5, height - 278, "E一之三")
+    c.drawString(331, height - 278, "E一之四")
+    c.drawString(432.5, height - 278, "E一之五")
 
-    c.drawString(30, height - 247, "B二之一")
-    c.drawString(213, height - 247, "B二之二")
-    c.drawString(273, height - 247, "B二之三")
-    c.drawString(333, height - 247, "B二之四")
-    c.drawString(434, height - 247, "B二之五")
+    c.drawString(28.5, height - 301, "B二之一")
+    c.drawString(211.5, height - 301, "B二之二")
+    c.drawString(271.5, height - 301, "B二之三")
+    c.drawString(331, height - 301, "B二之四")
+    c.drawString(432.5, height - 301, "B二之五")
 
-    c.drawString(30, height - 262, "C二之一")
-    c.drawString(213, height - 262, "C二之二")
-    c.drawString(273, height - 262, "C二之三")
-    c.drawString(333, height - 262, "C二之四")
-    c.drawString(434, height - 262, "C二之五")
+    c.drawString(28.5, height - 324, "C二之一")
+    c.drawString(211.5, height - 324, "C二之二")
+    c.drawString(271.5, height - 324, "C二之三")
+    c.drawString(331, height - 324, "C二之四")
+    c.drawString(432.5, height - 324, "C二之五")
 
-    c.drawString(30, height - 277, "D二之一")
-    c.drawString(213, height - 277, "D二之二")
-    c.drawString(273, height - 277, "D二之三")
-    c.drawString(333, height - 277, "D二之四")
-    c.drawString(434, height - 277, "D二之五")
+    c.drawString(28.5, height - 348, "D二之一")
+    c.drawString(211.5, height - 348, "D二之二")
+    c.drawString(271.5, height - 348, "D二之三")
+    c.drawString(331, height - 348, "D二之四")
+    c.drawString(432.5, height - 348, "D二之五")
 
     # 勾選一般蟲害防治(左側)
-    c.drawString(42, height - 400, "V")
-    c.drawString(42, height - 420, "V")
-    c.drawString(42, height - 440, "V")
-    c.drawString(42, height - 460, "V")
-    c.drawString(42, height - 480, "V")
+    c.drawString(43, height - 396, "V")
+    c.drawString(43, height - 418, "V")
+    c.drawString(43, height - 440, "V")
+    c.drawString(43, height - 462, "V")
+    c.drawString(43, height - 484, "V")
 
     # 勾選一般蟲害防治(右側)
-    c.drawString(170, height - 400, "V")
+    c.drawString(171, height - 396, "V")
+
+    # 蟲紙
+    c.drawString(255, height - 484, "10")
 
     # 勾選鼠害防治(左側)
-    c.drawString(310, height - 400, "V")
+    c.drawString(312, height - 396, "V")
     
 
     # 勾選鼠害防治(右側)
-    c.drawString(435, height - 400, "V")
+    c.drawString(437, height - 396, "V")
+
+    # 捕鼠
+    c.drawString(537, height - 440, "10")
 
 
 
 
 
-    c.drawString(100, height - 570, customer_info['todoList']) 
-    text_object = c.beginText(40, height - 590)
+    c.drawString(100, height - 520, customer_info['todoList']) 
+    text_object = c.beginText(40, height - 540)
     text_object.setFont("twKai", 12)
     add_wrapped_text(text_object, customer_info['workReport'], 31)
     c.drawText(text_object)
-    c.drawString(105, height - 730, "範例一二三")
+    c.drawString(105, height - 680, "範例一二三")
+    c.drawString(105, height - 700, "範例一二三")
     # 保存PDF
     c.save()
 
