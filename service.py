@@ -109,17 +109,23 @@ def generate_pdf_with_chinese(customer_info, output_filename):
     c.drawString(432.5, height - 348, customer_info['drug4_5'])
 
     # 勾選一般蟲害防治(左側)
-    c.drawString(43, height - 396, true_false_return(True))
-    c.drawString(43, height - 418, true_false_return(True))
-    c.drawString(43, height - 440, true_false_return(True))
-    c.drawString(43, height - 462, true_false_return(True))
-    c.drawString(43, height - 484, true_false_return(True))
+    c.drawString(43, height - 396, true_false_return(customer_info['pestControlL1_1']))
+    c.drawString(43, height - 418, true_false_return(customer_info['pestControlL1_2']))
+    c.drawString(43, height - 440, true_false_return(customer_info['pestControlL1_3']))
+    c.drawString(43, height - 462, true_false_return(customer_info['pestControlL1_4']))
+    c.drawString(43, height - 484, true_false_return(customer_info['pestControlL1_5']))
 
+
+    # pestControlR1_1
+    # pestControlR1_2
+    # pestControlR1_3
+    # pestControlR1_4
+    # pestControlR1_5
     # 勾選一般蟲害防治(右側)
-    c.drawString(171, height - 396, true_false_return(True))
+    c.drawString(171, height - 396, true_false_return(customer_info['pestControlR1_1']))
 
     # 蟲紙
-    c.drawString(255, height - 484, "10")
+    c.drawString(255, height - 484, customer_info['pestPaper'])
 
     # 勾選鼠害防治(左側)
     c.drawString(312, height - 396, true_false_return(True))
@@ -129,7 +135,7 @@ def generate_pdf_with_chinese(customer_info, output_filename):
     c.drawString(437, height - 396, true_false_return(True))
 
     # 捕鼠
-    c.drawString(537, height - 440, true_false_return(True))
+    c.drawString(537, height - 440, "10")
 
 
 
@@ -199,6 +205,20 @@ customer_info = {
     'drug4_3': "D二之三",
     'drug4_4': "D二之四",
     'drug4_5': "D二之五",
+
+    'pestControlL1_1': True,
+    'pestControlL1_2': True,
+    'pestControlL1_3': True,
+    'pestControlL1_4': True,
+    'pestControlL1_5': True,
+
+    'pestControlR1_1': True,
+    # 'pestControlR1_2': True,
+    # 'pestControlR1_3': True,
+    # 'pestControlR1_4': True,
+    # 'pestControlR1_5': True,
+    'pestPaper': "10",
+
 
 
 
