@@ -1,10 +1,11 @@
-import sys
+import sys,os
 from PyQt6.QtWidgets import QApplication, QVBoxLayout, QWidget, QPushButton, QCheckBox, QScrollArea, QMessageBox
 from checkboxesArea.checkboxesAreaServise import CheckboxesAreaServise  # 引入 CheckboxesAreaServise
 from checkboxesArea.checkboxesAreaItem import CheckboxesAreaItem  # 引入 CheckboxesAreaItem
 from fornPage.fornPage import FrontPage  # 引入其他 UI 組件
 from drugForm.drugPage import DrugForm  # 引入 drugPage 的 FormWidget
 from todoArea.todoArea import TodoArea  # 引入新的 TodoArea
+from service import generate_pdf_with_chinese
 
 class MainWindow(QWidget):
     def __init__(self):
