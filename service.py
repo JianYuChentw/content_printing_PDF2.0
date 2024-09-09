@@ -31,6 +31,7 @@ def generate_pdf_with_chinese(customer_info):
     safe_date = customer_info['constructionDate'].replace('/', '-')
     filename = f"{safe_date[:11]}-{customer_info['billName']}.pdf"
     output_filename = os.path.join(output_dir, filename)  # 組合完整的檔案路徑
+    print(output_filename)
     c = canvas.Canvas(output_filename, pagesize=A4)
     width, height = A4
 
@@ -45,13 +46,13 @@ def generate_pdf_with_chinese(customer_info):
     c.drawString(80, height - 90, f"{customer_info['billName']}")
     c.drawString(80, height - 110, f"{customer_info['invoiceNumber']}")
     c.drawString(80, height - 131, f"{customer_info['clientPhone']}")
-    c.drawString(80, height - 151, f"{customer_info['clientContactPerson']}")
+    c.drawString(80, height - 148, f"{customer_info['clientContactPerson']}")
 
     # 輸出客戶資訊（右側）
-    c.drawString(322, height - 85, f"{customer_info['constructionPersonInCharge']}")
-    c.drawString(462, height - 85, f"{customer_info['constructionPersonInChargePhone']}")
-    c.drawString(322, height - 108, f"{customer_info['constructionDate']}")
-    c.drawString(320, height - 150, f"{customer_info['constructionAddress']}")
+    c.drawString(326, height - 80, f"{customer_info['constructionPersonInCharge']}")
+    c.drawString(470, height - 80, f"{customer_info['constructionPersonInChargePhone']}")
+    c.drawString(328, height - 108, f"{customer_info['constructionDate']}")
+    c.drawString(325, height - 145, f"{customer_info['constructionAddress']}")
 
     # 施工頻率
     if customer_info['construction'] == "多次":
@@ -63,70 +64,82 @@ def generate_pdf_with_chinese(customer_info):
         c.drawString(81, height - 167, "V")
 
     # 防治項目勾選
-    c.drawString(80, height - 189, true_false_return(customer_info['pestControl']))
-    c.drawString(80, height - 215, true_false_return(customer_info['fleasControl']))
+    c.drawString(80, height - 195, true_false_return(customer_info['pestControl']))
+    c.drawString(80, height - 220, true_false_return(customer_info['fleasControl']))
 
-    c.drawString(235, height - 189, true_false_return(customer_info['temiteControl']))
-    c.drawString(235, height - 215, true_false_return(customer_info['powerControl']))
+    c.drawString(239, height - 195, true_false_return(customer_info['temiteControl']))
+    c.drawString(239, height - 220, true_false_return(customer_info['powerControl']))
 
-    c.drawString(420, height - 189, true_false_return(customer_info['rodentControl']))
-    c.drawString(420, height - 215, true_false_return(customer_info['otrher']))
+    c.drawString(422, height - 195, true_false_return(customer_info['rodentControl']))
+    c.drawString(422, height - 220, true_false_return(customer_info['otrher']))
 
     # 藥品使用
-    c.drawString(28.5, height - 278, customer_info['drug1_1'])
-    c.drawString(211.5, height - 278, customer_info['drug1_2'])
-    c.drawString(271.5, height - 278, customer_info['drug1_3'])
-    c.drawString(331, height - 278, customer_info['drug1_4'])
-    c.drawString(432.5, height - 278, customer_info['drug1_5'])
+    c.drawString(25, height - 278, customer_info['drug1_1'])
+    c.drawString(210, height - 278, customer_info['drug1_2'])
+    c.drawString(266, height - 278, customer_info['drug1_3'])
+    c.drawString(325, height - 278, customer_info['drug1_4'])
+    c.drawString(430, height - 278, customer_info['drug1_5'])
 
-    c.drawString(28.5, height - 301, customer_info['drug2_1'])
-    c.drawString(211.5, height - 301, customer_info['drug2_2'])
-    c.drawString(271.5, height - 301, customer_info['drug2_3'])
-    c.drawString(331, height - 301, customer_info['drug2_4'])
-    c.drawString(432.5, height - 301, customer_info['drug2_5'])
+    c.drawString(25, height - 301, customer_info['drug2_1'])
+    c.drawString(210, height - 301, customer_info['drug2_2'])
+    c.drawString(266, height - 301, customer_info['drug2_3'])
+    c.drawString(325, height - 301, customer_info['drug2_4'])
+    c.drawString(430, height - 301, customer_info['drug2_5'])
 
-    c.drawString(28.5, height - 324, customer_info['drug3_1'])
-    c.drawString(211.5, height - 324, customer_info['drug3_2'])
-    c.drawString(271.5, height - 324, customer_info['drug3_3'])
-    c.drawString(331, height - 324, customer_info['drug3_4'])
-    c.drawString(432.5, height - 324, customer_info['drug3_5'])
+    c.drawString(25, height - 324, customer_info['drug3_1'])
+    c.drawString(210, height - 324, customer_info['drug3_2'])
+    c.drawString(266, height - 324, customer_info['drug3_3'])
+    c.drawString(325, height - 324, customer_info['drug3_4'])
+    c.drawString(430, height - 324, customer_info['drug3_5'])
 
-    c.drawString(28.5, height - 348, customer_info['drug4_1'])
-    c.drawString(211.5, height - 348, customer_info['drug4_2'])
-    c.drawString(271.5, height - 348, customer_info['drug4_3'])
-    c.drawString(331, height - 348, customer_info['drug4_4'])
-    c.drawString(432.5, height - 348, customer_info['drug4_5'])
+    c.drawString(25, height - 348, customer_info['drug4_1'])
+    c.drawString(210, height - 348, customer_info['drug4_2'])
+    c.drawString(266, height - 348, customer_info['drug4_3'])
+    c.drawString(325, height - 348, customer_info['drug4_4'])
+    c.drawString(430, height - 348, customer_info['drug4_5'])
 
     # 勾選一般蟲害防治(左側)
-    c.drawString(43, height - 396, true_false_return(customer_info['pestControlL1_1']))
-    c.drawString(43, height - 418, true_false_return(customer_info['pestControlL1_2']))
-    c.drawString(43, height - 440, true_false_return(customer_info['pestControlL1_3']))
+    c.drawString(43, height - 385, true_false_return(customer_info['pestControlL1_1']))
+    c.drawString(43, height - 410, true_false_return(customer_info['pestControlL1_2']))
+    c.drawString(43, height - 437, true_false_return(customer_info['pestControlL1_3']))
     c.drawString(43, height - 462, true_false_return(customer_info['pestControlL1_4']))
-    c.drawString(43, height - 484, true_false_return(customer_info['pestControlL1_5']))
+    c.drawString(43, height - 490, true_false_return(customer_info['pestControlL1_5']))
 
     # 勾選一般蟲害防治(右側)
-    c.drawString(171, height - 396, true_false_return(customer_info['pestControlR1_1']))
+    c.drawString(180, height - 385, true_false_return(customer_info['pestControlR1_1']))
+    c.drawString(180, height - 410, true_false_return(customer_info['pestControlR1_1']))
+    c.drawString(180, height - 437, true_false_return(customer_info['pestControlR1_1']))
+    c.drawString(180, height - 462, true_false_return(customer_info['pestControlR1_1']))
+    c.drawString(180, height - 490, true_false_return(customer_info['pestControlR1_1']))
 
     # 蟲紙
-    c.drawString(255, height - 484, customer_info['pestPaper'])
+    c.drawString(250, height - 490, customer_info['pestPaper'])
 
     # 勾選鼠害防治(左側)
-    c.drawString(312, height - 396, true_false_return(True))
+    c.drawString(315, height - 385, true_false_return(True))
+    c.drawString(315, height - 410, true_false_return(True))
+    c.drawString(315, height - 437, true_false_return(True))
+    c.drawString(315, height - 462, true_false_return(True))
+    c.drawString(315, height - 490, true_false_return(True))
 
     # 勾選鼠害防治(右側)
-    c.drawString(437, height - 396, true_false_return(True))
+    c.drawString(445, height - 385, true_false_return(True))
+    c.drawString(445, height - 410, true_false_return(True))
+    c.drawString(445, height - 437, true_false_return(True))
+    c.drawString(445, height - 462, true_false_return(True))
+    c.drawString(445, height - 490, true_false_return(True))
 
     # 捕鼠
-    c.drawString(537, height - 440, "10")
+    c.drawString(520, height - 435, "10")
 
     # 其他資訊
-    c.drawString(100, height - 520, customer_info['todoList']) 
-    text_object = c.beginText(40, height - 540)
+    c.drawString(100, height - 525, customer_info['todoList']) 
+    text_object = c.beginText(40, height - 547)
     text_object.setFont("twKai", 12)
     add_wrapped_text(text_object, customer_info['workReport'], 31)
     c.drawText(text_object)
-    c.drawString(105, height - 680, customer_info['technician'])
-    c.drawString(105, height - 700, customer_info['pharmaceuticalTechnician'])
+    c.drawString(105, height - 695, customer_info['technician'])
+    c.drawString(105, height - 725, customer_info['pharmaceuticalTechnician'])
 
     # 保存PDF
     c.save()
@@ -142,12 +155,12 @@ customer_info = {
     'clientContactPerson': '李四',
     'constructionPersonInCharge': '王五哥',
     'constructionPersonInChargePhone': '0912-345-678',
-    'constructionDate': '2024/01/01 00:00 - 2024/01/01 00:00',
+    'constructionDate': '2024/10/11 00:00 - 2024/01/01 00:00',
     'constructionAddress': '台北市中正區',
-    'construction': "單次",
-    'monthly': "",
-    'quarterly': "",
-    'yearly': "",
+    'construction': "多次",
+    'monthly': "10",
+    'quarterly': "10",
+    'yearly': "10",
     'pestControl': True,
     'fleasControl': True,
     'temiteControl': True,
@@ -188,4 +201,4 @@ customer_info = {
 }
 
 # 生成PDF
-generate_pdf_with_chinese(customer_info)
+# generate_pdf_with_chinese(customer_info)
