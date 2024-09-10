@@ -1,5 +1,6 @@
 import sys,os
 from PyQt6.QtWidgets import QApplication, QVBoxLayout, QWidget, QPushButton, QCheckBox, QScrollArea, QMessageBox
+from PyQt6.QtGui import QIcon
 from checkboxesArea.checkboxesAreaServise import CheckboxesAreaServise  # 引入 CheckboxesAreaServise
 from checkboxesArea.checkboxesAreaItem import CheckboxesAreaItem  # 引入 CheckboxesAreaItem
 from fornPage.fornPage import FrontPage  # 引入其他 UI 組件
@@ -10,9 +11,12 @@ from service import generate_pdf_with_chinese
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-
+        self.setWindowTitle("三聯單輸出工具")
+        base_dir = os.path.dirname(sys.executable)
+        imgPath = os.path.join(base_dir, 'save/form96.png')
+        self.setWindowIcon(QIcon(imgPath))  # 設置圖標路徑
         # 設置視窗的寬高，例如850x800
-        self.resize(850, 800)
+        self.resize(850, 700)
 
         # 創建主佈局
         self.main_layout = QVBoxLayout()
@@ -223,6 +227,9 @@ class MainWindow(QWidget):
 
 def main():
     app = QApplication([])
+    base_dir = os.path.dirname(sys.executable)
+    imgPath = os.path.join(base_dir, 'save/form96.png')
+    app.setWindowIcon(QIcon(imgPath))
 
     # 創建主視窗
     main_window = MainWindow()

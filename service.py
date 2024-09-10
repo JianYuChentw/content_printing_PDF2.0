@@ -116,11 +116,11 @@ def generate_pdf_with_chinese(customer_info):
     c.drawString(250, height - 490, customer_info['pestPaper'])
 
     # 勾選鼠害防治(左側)
-    c.drawString(315, height - 385, true_false_return(customer_info['mouseControlL1_1']))
-    c.drawString(315, height - 410, true_false_return(customer_info['mouseControlL1_2']))
-    c.drawString(315, height - 437, true_false_return(customer_info['mouseControlL1_3']))
-    c.drawString(315, height - 462, true_false_return(customer_info['mouseControlL1_4']))
-    c.drawString(315, height - 490, true_false_return(customer_info['mouseControlL1_5']))
+    c.drawString(325, height - 385, true_false_return(customer_info['mouseControlL1_1']))
+    c.drawString(325, height - 410, true_false_return(customer_info['mouseControlL1_2']))
+    c.drawString(325, height - 437, true_false_return(customer_info['mouseControlL1_3']))
+    c.drawString(325, height - 462, true_false_return(customer_info['mouseControlL1_4']))
+    c.drawString(325, height - 490, true_false_return(customer_info['mouseControlL1_5']))
 
     # 勾選鼠害防治(右側)
     c.drawString(445, height - 385, true_false_return(customer_info['mouseControlR1_1']))
