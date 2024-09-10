@@ -10,14 +10,51 @@ def true_false_return(value):
     return "V" if value else ""
 
 # 工作報告 - 多行文本處理
-def add_wrapped_text(text_object, text, max_chars):
-    # 將文本按指定的字元數進行換行
-    lines = []
-    for original_line in text.split('\n'):
-        wrapped_lines = wrap(original_line, max_chars)
-        lines.extend(wrapped_lines)
-    for line in lines:
-        text_object.textLine(line)
+def draw_wrapped_text(c, text, start_x, start_y, end_x, font_name="twKai", font_size=12):
+    """
+    在指定的起始位置和最終位置繪製自動換行文本。
+    - c: Canvas 物件
+    - text: 要繪製的文本
+    - start_x: 起始的 X 坐標
+    - start_y: 起始的 Y 坐標
+    - end_x: 行的最終位置（限制文本寬度）
+    - font_name: 字體名稱
+    - font_size: 字體大小
+    """
+    # 設置字體和大小
+    c.setFont(font_name, font_size)
+
+    # 計算可用的總寬度
+    total_width = end_x - start_x
+
+    # 計算單個中文字的寬度
+    single_char_width = c.stringWidth("測", font_name, font_size)
+
+    # 創建文本物件並設置起始位置
+    text_object = c.beginText(start_x+1, start_y)
+    text_object.setFont(font_name, font_size)
+
+    current_line = ""
+    current_width = 0
+
+    for char in text:
+        char_width = c.stringWidth(char, font_name, font_size)
+
+        # 如果加上這個字會超過行寬，則換行
+        if current_width + char_width > total_width:
+            text_object.textLine(current_line)
+            current_line = char
+            current_width = char_width
+        else:
+            current_line += char
+            current_width += char_width
+
+    # 處理最後一行
+    if current_line:
+        text_object.textLine(current_line)
+
+    # 繪製文本到畫布
+    c.drawText(text_object)
 
 def generate_pdf_with_chinese(customer_info):
     # 定義輸出資料夾路徑
@@ -134,10 +171,9 @@ def generate_pdf_with_chinese(customer_info):
 
     # 其他資訊
     c.drawString(100, height - 525, customer_info['todoList']) 
-    text_object = c.beginText(40, height - 547)
-    text_object.setFont("twKai", 12)
-    add_wrapped_text(text_object, customer_info['workReport'], 31)
-    c.drawText(text_object)
+
+    draw_wrapped_text(c, customer_info['workReport'], 40, height - 547, 400)
+    
     c.drawString(105, height - 695, customer_info['technician'])
     c.drawString(105, height - 725, customer_info['pharmaceuticalTechnician'])
 
@@ -145,7 +181,7 @@ def generate_pdf_with_chinese(customer_info):
     c.save()
 
 # 範例數據
-# data = '已完成施工，無異常，這句話看似簡單，卻承載著大量的工作與責任。首先，施工過程是一個繁瑣而複雜的任務，涉及到許多不同的階段和專業技能。從最初的設計圖紙到材料選擇，再到實際施工，每一個環節都需要嚴格的監督與管理。施工人員必須確保所有的工序都按照計劃進行，並且在過程中必須處理各種突發情況，例如天氣變化、材料延遲或意外的技術問題。其次，「無異常」這三個字代表了施工過程中沒有出現任何問題或偏差。這不僅僅是一個簡單的結果，更是施工質量和管理水平的體現。在現代建築施工中，無異常的完成意味著所有的設計規範都得到了嚴格遵守，所有的安全措施都得到了有效的實施。'
+# data = '已完成施工，無異常，這句話看似簡單，卻承載著大量的工與此與我知道的責任。首先，施工過程是一個繁瑣而複雜的任務，涉及到許多不同的階段和專業技能。從最初的設計圖紙到材料選擇，再到實際施工，每一個環節都需要嚴格的監督與管理。施工人員必須確保所有的工序都按照計劃進行，並且在過程中必須處理各種突發情況，例如天氣變化、材料延遲或意外的技術問題。其次，「無異常」這三個字代表了施工過程中沒有出現任何問題或偏差。這不僅僅是一個簡單的結果，更是施工質量和管理水平的體現。在現代建築施工中，無異常的完成意味著所有的設計規範都得到了嚴格遵守，所有的安全措施都得到了有效的實施。'
 
 # customer_info = {
 #     'clientName': '張三',
@@ -220,5 +256,6 @@ def generate_pdf_with_chinese(customer_info):
 #     'pharmaceuticalTechnician': "我施藥",
 # }
 
-# 生成PDF
+# # 生成PDF
 # generate_pdf_with_chinese(customer_info)
+
