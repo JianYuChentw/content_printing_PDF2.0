@@ -26,3 +26,9 @@ class CheckboxesAreaServise(QGroupBox):
 
         # 設置佈局
         self.setLayout(checkboxes_layout)
+    
+    def clear_checkboxes(self):
+        """清空所有複選框的狀態"""
+        for checkbox in self.findChildren(QCheckBox):
+            checkbox.setChecked(False)
+

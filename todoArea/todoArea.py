@@ -69,3 +69,11 @@ class TodoArea(QWidget):
             "技術員": self.technician_input.text(),
             "施藥人員": self.operator_input.text()
         }
+    
+    def clear_inputs(self):
+        """清空所有輸入框和文本框的內容"""
+        self.task_input.clear()  # 清空交辦事項的輸入框
+        self.report_input.clear()  # 清空工作報告的文本框
+        self.technician_input.clear()  # 清空技術員的輸入框
+        self.operator_input.clear()  # 清空施藥人員的輸入框
+

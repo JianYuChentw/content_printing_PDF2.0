@@ -98,3 +98,22 @@ class CheckboxesAreaItem(QWidget):
             self.catch_mouse_input.setEnabled(True)
         else:
             self.catch_mouse_input.setEnabled(False)
+    
+    def clear_checkboxes(self):
+        """清空所有勾選框和輸入框的內容"""
+        # 清空第一組的勾選框
+        for checkbox in self.group1_box.findChildren(QCheckBox):
+            checkbox.setChecked(False)
+
+        # 清空 "更換捕蟲紙" 的輸入框
+        self.trap_paper_input.clear()
+        self.trap_paper_input.setEnabled(False)  # 清空後禁用輸入框
+
+        # 清空第二組的勾選框
+        for checkbox in self.group2_box.findChildren(QCheckBox):
+            checkbox.setChecked(False)
+
+        # 清空 "捕獲老鼠" 的輸入框
+        self.catch_mouse_input.clear()
+        self.catch_mouse_input.setEnabled(False)  # 清空後禁用輸入框
+
