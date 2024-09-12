@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QTextEdit, QSpacerItem, QSizePolicy
-from PyQt6.QtGui import QFontMetrics
+from PyQt6.QtGui import QFontMetrics, QKeyEvent
+from PyQt6.QtCore import QEvent
 
 class TodoArea(QWidget):
     def __init__(self):
@@ -28,7 +29,7 @@ class TodoArea(QWidget):
                 border: 1px solid black;
             }
         """)
-        self.main_layout.addLayout(self.create_layout("工作報告", 150, self.report_input, 400))
+        self.main_layout.addLayout(self.create_layout("工作報告", 150, self.report_input, 405))
 
         # 創建顯示行數的標籤
         self.line_count_label = QLabel("行數: 0")
@@ -36,6 +37,9 @@ class TodoArea(QWidget):
 
         # 將文本框文本變化信號連接到更新方法
         self.report_input.textChanged.connect(self.update_line_count)
+
+        # 安裝事件過濾器來阻止貼上或輸入
+        self.report_input.installEventFilter(self)
 
         self.technician_input = QLineEdit()  # 保存技術員的輸入框
         self.main_layout.addLayout(self.create_layout("技術員", 30, self.technician_input, 150))
@@ -76,7 +80,6 @@ class TodoArea(QWidget):
         layout.setSpacing(0)  # 減少標籤與輸入框的間距
 
         return layout
-
 
     def update_line_count(self):
         """根據字元寬度和自動換行來更新行數顯示，並限制行數不超過 10 行"""
@@ -129,6 +132,50 @@ class TodoArea(QWidget):
             cursor.deletePreviousChar()  # 刪除最後輸入的字元
             self.report_input.setTextCursor(cursor)  # 重置游標位置
             self.report_input.blockSignals(False)  # 恢復信號
+
+    def eventFilter(self, obj, event):
+        """過濾器來攔截貼上和輸入事件"""
+        if obj == self.report_input:
+            # 檢查是否超過行數限制
+            if self.get_line_count() >= 10:
+                # 阻止鍵盤輸入
+                if event.type() == QEvent.Type(6):  # QEvent.KeyPress 對應的事件代碼是 6
+                    return True  # 阻止輸入
+                # 阻止貼上事件
+                elif event.type() == QEvent.Type(22):  # QEvent.Paste 對應的事件代碼是 22
+                    return True  # 阻止貼上
+        # 如果沒有超過行數限制，允許其他事件處理
+        return super().eventFilter(obj, event)
+
+    def get_line_count(self):
+        """計算當前的行數"""
+        text = self.report_input.toPlainText()
+        font = self.report_input.font()
+        metrics = QFontMetrics(font)
+        total_width = self.report_input.viewport().width()
+        
+        total_lines = 0
+        current_line = ""
+        current_width = 0
+
+        for char in text:
+            if char == '\n':
+                total_lines += 1
+                current_line = ""
+                current_width = 0
+                continue
+            char_width = metrics.horizontalAdvance(char)
+            if current_width + char_width > total_width:
+                total_lines += 1
+                current_line = char
+                current_width = char_width
+            else:
+                current_line += char
+                current_width += char_width
+        
+        if current_line:
+            total_lines += 1
+        return total_lines
 
     def get_todo_data(self):
         """獲取所有輸入的數據"""
