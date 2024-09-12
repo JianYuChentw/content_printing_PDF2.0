@@ -1,6 +1,6 @@
 import sys,os
 from PyQt6.QtWidgets import QApplication, QVBoxLayout, QWidget, QPushButton, QCheckBox, QScrollArea, QMessageBox
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QFont
 from checkboxesArea.checkboxesAreaServise import CheckboxesAreaServise  # 引入 CheckboxesAreaServise
 from checkboxesArea.checkboxesAreaItem import CheckboxesAreaItem  # 引入 CheckboxesAreaItem
 from fornPage.fornPage import FrontPage  # 引入其他 UI 組件
@@ -16,7 +16,7 @@ class MainWindow(QWidget):
         imgPath = os.path.join(base_dir, 'save/form96.png')
         self.setWindowIcon(QIcon(imgPath))  # 設置圖標路徑
         # 設置視窗的寬高，例如850x800
-        self.resize(850, 700)
+        self.resize(850, 750)
 
         # 創建主佈局
         self.main_layout = QVBoxLayout()
@@ -51,8 +51,15 @@ class MainWindow(QWidget):
 
         # 創建輸出按鈕
         self.output_button = QPushButton("輸出")
+        self.output_button.setStyleSheet(
+            "background-color: #02C874; color: black; border-radius:5px;"  # 設置背景顏色和文字顏色
+        )
+        self.output_button.setFixedHeight(50)
+        font = QFont("Arial", 18)
+        self.output_button.setFont(font)
         self.output_button.clicked.connect(self.output_data)  # 綁定按鈕點擊事件
         self.scroll_layout.addWidget(self.output_button)
+        
 
         # 設置滾動區域的 widget
         self.scroll_area.setWidget(self.scroll_widget)
@@ -84,7 +91,7 @@ class MainWindow(QWidget):
 
         # 從 CheckboxesAreaItem 取得勾選框的選擇
         checkboxes_item_data = self.get_checkboxes_item_data()
-        # print("CheckboxesAreaItem 勾選框選擇:", checkboxes_item_data)
+        # print(" 勾選框選擇:", checkboxes_item_data)
 
         # 從 TodoArea 取得輸入數據
         todo_data = self.todo_area.get_todo_data()
@@ -124,8 +131,8 @@ class MainWindow(QWidget):
         # print("FrontPage:", form_data)
         # print("CheckboxesArea:", checkboxes_data)
         # print("DrugForm:", drug_data)
-        print("CheckboxesAreaItem:", checkboxes_item_data)
-        # print("TodoArea:", todo_data)
+        # print("CheckboxesAreaItem:", checkboxes_item_data)
+        print("TodoArea:", todo_data)
         customer_info = {
             'clientName':form_data['name'], 
             'billName': form_data['invoice_title'],

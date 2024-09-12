@@ -12,7 +12,7 @@ def true_false_return(value):
 # 工作報告 - 多行文本處理
 def draw_wrapped_text(c, text, start_x, start_y, end_x, font_name="twKai", font_size=12):
     """
-    在指定的起始位置和最終位置繪製自動換行文本。
+    在指定的起始位置和最終位置繪製自動換行文本，並處理手動換行符。
     - c: Canvas 物件
     - text: 要繪製的文本
     - start_x: 起始的 X 坐標
@@ -27,17 +27,24 @@ def draw_wrapped_text(c, text, start_x, start_y, end_x, font_name="twKai", font_
     # 計算可用的總寬度
     total_width = end_x - start_x
 
-    # 計算單個中文字的寬度
-    single_char_width = c.stringWidth("測", font_name, font_size)
-
     # 創建文本物件並設置起始位置
     text_object = c.beginText(start_x+1, start_y)
     text_object.setFont(font_name, font_size)
 
     current_line = ""
     current_width = 0
+    line_count = 0  # 用來追蹤行數
 
     for char in text:
+        # 檢查換行符
+        if char == '\n':
+            # 強制換行
+            text_object.textLine(current_line)
+            current_line = ""
+            current_width = 0
+            line_count += 1  # 每次換行時增加行數
+            continue
+
         char_width = c.stringWidth(char, font_name, font_size)
 
         # 如果加上這個字會超過行寬，則換行
@@ -45,6 +52,7 @@ def draw_wrapped_text(c, text, start_x, start_y, end_x, font_name="twKai", font_
             text_object.textLine(current_line)
             current_line = char
             current_width = char_width
+            line_count += 1  # 每次換行時增加行數
         else:
             current_line += char
             current_width += char_width
@@ -52,9 +60,12 @@ def draw_wrapped_text(c, text, start_x, start_y, end_x, font_name="twKai", font_
     # 處理最後一行
     if current_line:
         text_object.textLine(current_line)
+        line_count += 1  # 如果最後一行有內容，也算作一行
 
     # 繪製文本到畫布
+    print(line_count)
     c.drawText(text_object)
+
 
 def generate_pdf_with_chinese(customer_info):
     # 定義輸出資料夾路徑
