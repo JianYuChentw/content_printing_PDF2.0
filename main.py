@@ -132,7 +132,7 @@ class MainWindow(QWidget):
         # print("CheckboxesArea:", checkboxes_data)
         # print("DrugForm:", drug_data)
         # print("CheckboxesAreaItem:", checkboxes_item_data)
-        print("TodoArea:", todo_data)
+        # print("TodoArea:", todo_data)
         customer_info = {
             'clientName':form_data['name'], 
             'billName': form_data['invoice_title'],
@@ -148,11 +148,14 @@ class MainWindow(QWidget):
             'quarterly': form_data['quarterly'],
             'yearly': form_data['halfyear'],
             'pestControl':checkboxes_data['一般害蟲防治 – Pest Control'] ,
-            'fleasControl': checkboxes_data['白蟻防治 – Termite Control'],
-            'temiteControl': checkboxes_data['鼠害防治 – Rodent Control'],
-            'powerControl': checkboxes_data['跳蚤防治 – Fleas Control'],
-            'rodentControl': checkboxes_data['粉狀蛀蟲防治 – Powder Post Beetle'],
+            'fleasControl': checkboxes_data['跳蚤防治 – Fleas Control'],
+
+            'temiteControl': checkboxes_data['白蟻防治 – Termite Control'],
+            'powerControl': checkboxes_data['粉狀蛀蟲防治 – Powder Post Beetle'],
+
+            'rodentControl': checkboxes_data['鼠害防治 – Rodent Control'],
             'otrher': checkboxes_data['其他 – Others'],
+            
             'drug1_1': drug_data[0][0],
             'drug1_2': drug_data[0][1],
             'drug1_3': drug_data[0][2],

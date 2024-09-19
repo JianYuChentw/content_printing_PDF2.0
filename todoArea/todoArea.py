@@ -29,7 +29,7 @@ class TodoArea(QWidget):
                 border: 1px solid black;
             }
         """)
-        self.main_layout.addLayout(self.create_layout("工作報告", 150, self.report_input, 405))
+        self.main_layout.addLayout(self.create_layout("工作報告", 150, self.report_input, 408))
 
         # 創建顯示行數的標籤
         self.line_count_label = QLabel("行數: 0")
@@ -133,6 +133,7 @@ class TodoArea(QWidget):
             self.report_input.setTextCursor(cursor)  # 重置游標位置
             self.report_input.blockSignals(False)  # 恢復信號
 
+
     def eventFilter(self, obj, event):
         """過濾器來攔截貼上和輸入事件"""
         if obj == self.report_input:
@@ -180,11 +181,12 @@ class TodoArea(QWidget):
     def get_todo_data(self):
         """獲取所有輸入的數據"""
         return {
-            "交辦事項": self.task_input.text(),
-            "工作報告": self.report_input.toPlainText(),
-            "技術員": self.technician_input.text(),
-            "施藥人員": self.operator_input.text()
+            '交辦事項': self.task_input.text().replace('"', "'"),
+            '工作報告': self.report_input.toPlainText().replace('"', "'"),
+            '技術員': self.technician_input.text().replace('"', "'"),
+            '施藥人員': self.operator_input.text().replace('"', "'")
         }
+
 
     def clear_inputs(self):
         """清空所有輸入框和文本框的內容"""

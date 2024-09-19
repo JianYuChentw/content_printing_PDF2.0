@@ -146,7 +146,7 @@ class DrugForm(QWidget):
 
     def get_form_data(self):
         """取得表單中的四行五列的藥物資料"""
-        return [[self.inputs[row][col].text() for col in range(5)] for row in range(4)]
+        return [[self.inputs[row][col].text().replace('"', "'") for col in range(5)] for row in range(4)]
 
     def show_message_box(self, message):
         """顯示提示訊息"""

@@ -239,20 +239,21 @@ class FrontPage(QWidget):
 
 
         return {
-            "name": self.name_input.findChild(QLineEdit).text(),
-            "invoice_title": self.invoice_input.findChild(QLineEdit).text(),
-            "tax_id": self.tax_id_input.findChild(QLineEdit).text(),
-            "phone": self.phone_input.findChild(QLineEdit).text(),
-            "contact_person": self.contact_person_input.findChild(QLineEdit).text(),
-            "window": self.window_input.findChild(QLineEdit).text(),
-            "window_phone": self.window_phone_input.findChild(QLineEdit).text(),
-            "date": self.date_input.findChild(QLineEdit).text(),
-            "address": self.address_input.findChild(QLineEdit).text(),
-            "frequency": self.frequency_dropdown.currentText(),
-            "monthly": monthly,
-            "quarterly": quarterly,
-            "halfyear": halfyear
+            'name': self.name_input.findChild(QLineEdit).text().replace('"', "'"),
+            'invoice_title': self.invoice_input.findChild(QLineEdit).text().replace('"', "'"),
+            'tax_id': self.tax_id_input.findChild(QLineEdit).text().replace('"', "'"),
+            'phone': self.phone_input.findChild(QLineEdit).text().replace('"', "'"),
+            'contact_person': self.contact_person_input.findChild(QLineEdit).text().replace('"', "'"),
+            'window': self.window_input.findChild(QLineEdit).text().replace('"', "'"),
+            'window_phone': self.window_phone_input.findChild(QLineEdit).text().replace('"', "'"),
+            'date': self.date_input.findChild(QLineEdit).text().replace('"', "'"),
+            'address': self.address_input.findChild(QLineEdit).text().replace('"', "'"),
+            'frequency': self.frequency_dropdown.currentText().replace('"', "'"),
+            'monthly': monthly,
+            'quarterly': quarterly,
+            'halfyear': halfyear
         }
+
 
     def show_message_box(self, message):
         """顯示提示訊息"""

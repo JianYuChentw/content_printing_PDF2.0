@@ -84,7 +84,7 @@ def generate_pdf_with_chinese(customer_info):
     width, height = A4
 
     # 註冊中文字體
-    pdfmetrics.registerFont(TTFont('twKai', 'fonts/twKai.ttf'))  # 替換為你自己的字體文件
+    pdfmetrics.registerFont(TTFont('twKai', 'save/fonts/twKai.ttf'))  # 替換為你自己的字體文件
 
     # 設定字體和大小
     c.setFont("twKai", 12)
